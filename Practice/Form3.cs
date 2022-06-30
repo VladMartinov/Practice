@@ -54,11 +54,19 @@ namespace Practice
             {
                 while (!reader.EndOfStream)
                 {
-                    string[] line = reader.ReadLine().Split();
-                    if (int.Parse(line[3]) < 2005 && line[4] == "Мужской")
+                    string LineInfo = reader.ReadLine();
+                    string[] line = LineInfo.Split();
+                    try
                     {
-                        item = new ListViewItem(line);
-                        listView1.Items.Add(item);
+                        if (int.Parse(line[3]) < 2005 && line[4] == "Мужской")
+                        {
+                            item = new ListViewItem(line);
+                            listView1.Items.Add(item);
+                        }
+                    }
+                    catch
+                    {
+                        MessageBox.Show($"Не удалось считать некоторые данные из файла:\n{LineInfo}");
                     }
                 }
 
